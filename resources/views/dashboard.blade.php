@@ -127,31 +127,10 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-white border-0 pt-3 px-4">
                     <h5 class="card-title fw-bold mb-0 text-dark">
-                        <i class="bi bi-info-circle text-success me-2"></i>Información del Sistema
+                        <i class="bi bi-info-circle text-success me-2"></i>Actividades recientes
                     </h5>
                 </div>
-                <div class="card-body px-4">
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-3 d-flex align-items-start gap-2">
-                            <i class="bi bi-check-circle-fill text-success mt-1"></i>
-                            <div>
-                                <strong>Plataforma Web Oficial:</strong> Cementerio General de Sacaba.
-                            </div>
-                        </li>
-                        <li class="mb-3 d-flex align-items-start gap-2">
-                            <i class="bi bi-check-circle-fill text-success mt-1"></i>
-                            <div>
-                                <strong>Estructura Física:</strong> Carga inicial verificada del Bloque 18 (Lado Norte: 130 nichos).
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-start gap-2">
-                            <i class="bi bi-shield-check text-success mt-1"></i>
-                            <div>
-                                <strong>Control de Accesos:</strong> Restricciones activadas para el rol <code>{{ Auth::user()->rol }}</code>.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </div>

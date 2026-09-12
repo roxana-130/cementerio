@@ -17,8 +17,8 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    {{-- Difuntos (Placeholder) --}}
-                    <x-nav-link href="#" class="text-emerald-200 hover:text-white">
+                    {{-- Difuntos --}}
+                    <x-nav-link :href="route('difuntos.index')" :active="request()->routeIs('difuntos.*')" class="text-emerald-100 hover:text-white">
                         {{ __('Difuntos') }}
                     </x-nav-link>
 
@@ -105,7 +105,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link href="#" class="text-emerald-200">
+            <x-responsive-nav-link :href="route('difuntos.index')" :active="request()->routeIs('difuntos.*')" class="text-white">
                 {{ __('Difuntos') }}
             </x-responsive-nav-link>
 

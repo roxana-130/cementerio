@@ -1,102 +1,108 @@
-{{-- Sidebar Lateral Izquierdo --}}
-<div class="sidebar bg-sacaba text-white flex-shrink-0 p-3 flex-column" id="sidebarNav">
-    {{-- Header del Sidebar / Brand --}}
-    <div class="sidebar-header d-flex align-items-center gap-2 pb-3 mb-3 border-bottom border-success-subtle px-2">
-        <div class="brand-icon bg-white text-emerald rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 40px; height: 40px; min-width: 40px; color: #113615;">
-            <i class="bi bi-building-fill fs-5"></i>
-        </div>
-        <div class="lh-sm">
-            <span class="fw-bold d-block text-white tracking-wide" style="font-size: 0.95rem;">Cementerio General</span>
-            <small class="text-success-light opacity-75 text-uppercase fw-semibold" style="font-size: 0.72rem; letter-spacing: 0.5px;">Sacaba - Cochabamba</small>
-        </div>
+{{-- Sidebar Lateral Izquierdo (AdminLTE 4) --}}
+<aside class="app-sidebar shadow" data-bs-theme="dark">
+
+    {{-- Marca / encabezado del sidebar --}}
+    <div class="sidebar-brand">
+        <a href="{{ route('dashboard') }}" class="brand-link">
+            <div class="brand-icon bg-white text-emerald rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm flex-shrink-0" style="width: 36px; height: 36px; color: #113615;">
+                <i class="bi bi-building-fill fs-6"></i>
+            </div>
+            <span class="brand-text fw-bold ms-2 lh-sm text-white">
+                Cementerio General
+                <small class="d-block text-success-light text-uppercase fw-semibold" style="font-size: 0.65rem; letter-spacing: 0.5px;">Sacaba - Cochabamba</small>
+            </span>
+        </a>
     </div>
 
-    {{-- Menu de navegación principal --}}
-    <ul class="nav nav-pills flex-column mb-auto gap-1">
-        {{-- Dashboard --}}
-        <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-emerald-active fw-semibold' : 'opacity-85 hover-bg' }}">
-                <i class="bi bi-speedometer2 me-2 fs-5"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
+    {{-- Menu de navegacion principal --}}
+    <div class="sidebar-wrapper">
+        <nav class="mt-2">
+            <ul class="sidebar-menu flex-column" role="menu">
 
-        {{-- Difuntos --}}
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white opacity-85 hover-bg">
-                <i class="bi bi-person-lines-fill me-2 fs-5"></i>
-                <span>Difuntos</span>
-            </a>
-        </li>
+                {{-- Dashboard --}}
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-speedometer2"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
 
-        {{-- Agenda --}}
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white opacity-85 hover-bg">
-                <i class="bi bi-calendar3 me-2 fs-5"></i>
-                <span>Agenda</span>
-            </a>
-        </li>
+                {{-- Difuntos --}}
+                <li class="nav-item">
+                    <a href="{{ route('difuntos.index') }}" class="nav-link {{ request()->routeIs('difuntos.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-person-lines-fill"></i>
+                        <p>Difuntos</p>
+                    </a>
+                </li>
 
-        {{-- Mapa --}}
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white opacity-85 hover-bg">
-                <i class="bi bi-map-fill me-2 fs-5"></i>
-                <span>Mapa</span>
-            </a>
-        </li>
+                {{-- Agenda --}}
+                <li class="nav-item">
+                    <a href="{{ route('agenda.index') }}" class="nav-link {{ request()->routeIs('agenda.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-calendar3"></i>
+                        <p>Agenda</p>
+                    </a>
+                </li>
 
-        {{-- Módulos restringidos a Administrador --}}
-        @if (Auth::user() && Auth::user()->rol === 'administrador')
-            <li class="nav-header text-uppercase text-success-light fw-bold mt-3 mb-1 px-3 opacity-75" style="font-size: 0.7rem; letter-spacing: 1px;">
-                Administración
-            </li>
+                {{-- Mapa --}}
+                <li class="nav-item">
+                    <a href="{{ route('mapa.index') }}" class="nav-link {{ request()->routeIs('mapa.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-map-fill"></i>
+                        <p>Mapa</p>
+                    </a>
+                </li>
 
-            {{-- Historial --}}
-            <li class="nav-item">
-                <a href="#" class="nav-link text-white opacity-85 hover-bg">
-                    <i class="bi bi-clock-history me-2 fs-5"></i>
-                    <span>Historial</span>
-                </a>
-            </li>
+                {{-- Modulos restringidos a Administrador --}}
+                @if (Auth::user() && Auth::user()->rol === 'administrador')
+                    <li class="nav-header">ADMINISTRACIÓN</li>
 
-            {{-- Panteoneros --}}
-            <li class="nav-item">
-                <a href="#" class="nav-link text-white opacity-85 hover-bg">
-                    <i class="bi bi-person-gear me-2 fs-5"></i>
-                    <span>Panteoneros</span>
-                </a>
-            </li>
+                    {{-- Historial --}}
+                    <li class="nav-item">
+                        <a href="{{ route('historial.index') }}" class="nav-link {{ request()->routeIs('historial.*') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-clock-history"></i>
+                            <p>Historial</p>
+                        </a>
+                    </li>
 
-            {{-- Usuarios --}}
-            <li class="nav-item">
-                <a href="{{ route('usuarios.index') }}" class="nav-link text-white {{ request()->routeIs('usuarios.*') ? 'active bg-emerald-active fw-semibold' : 'opacity-85 hover-bg' }}">
-                    <i class="bi bi-people-fill me-2 fs-5"></i>
-                    <span>Usuarios</span>
-                </a>
-            </li>
-        @endif
-    </ul>
+                    {{-- Panteoneros --}}
+                    <li class="nav-item">
+                        <a href="{{ route('panteoneros.index') }}" class="nav-link {{ request()->routeIs('panteoneros.*') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-person-gear"></i>
+                            <p>Panteoneros</p>
+                        </a>
+                    </li>
+
+                    {{-- Usuarios --}}
+                    <li class="nav-item">
+                        <a href="{{ route('usuarios.index') }}" class="nav-link {{ request()->routeIs('usuarios.*') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-people-fill"></i>
+                            <p>Usuarios</p>
+                        </a>
+                    </li>
+                @endif
+            </ul>
+        </nav>
+    </div>
 
     {{-- Footer del Sidebar / Usuario logueado --}}
-    <div class="sidebar-footer pt-3 mt-auto border-top border-success-subtle px-2">
+    <div class="sidebar-footer border-top border-white-10 p-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-2 overflow-hidden">
-                <div class="avatar bg-white-10 rounded-circle text-white d-flex align-items-center justify-content-center fw-bold" style="width: 35px; height: 35px; min-width: 35px; background: rgba(255,255,255,0.15);">
+                <div class="avatar bg-white-10 rounded-circle text-white d-flex align-items-center justify-content-center fw-bold flex-shrink-0" style="width: 35px; height: 35px; background: rgba(255,255,255,0.15);">
                     {{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}
                 </div>
-                <div class="lh-xs overflow-hidden">
+                <div class="lh-sm overflow-hidden">
                     <span class="d-block text-truncate fw-semibold text-white" style="font-size: 0.85rem;">{{ Auth::user()->name ?? 'Usuario' }}</span>
                     <span class="badge bg-emerald-badge text-uppercase" style="font-size: 0.65rem;">{{ Auth::user()->rol ?? 'personal' }}</span>
                 </div>
             </div>
-            
+
             {{-- Formulario de Logout --}}
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
-                <button type="submit" class="btn btn-link text-white opacity-75 hover-opacity p-1 text-decoration-none" title="Cerrar sesión">
+                <button type="submit" class="btn btn-link text-white opacity-75 p-1 text-decoration-none" title="Cerrar sesion">
                     <i class="bi bi-box-arrow-right fs-5"></i>
                 </button>
             </form>
         </div>
     </div>
-</div>
+</aside>

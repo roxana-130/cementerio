@@ -1,7 +1,6 @@
+import * as bootstrap from 'bootstrap';
+import 'admin-lte';
 
-
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
+// Expuesto como global para las vistas Blade que instancian componentes de
+// Bootstrap por JS (ej. `new bootstrap.Modal(...)` en el mapa administrativo).
+window.bootstrap = bootstrap;

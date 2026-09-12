@@ -58,11 +58,16 @@ Esta lógica va en el modelo `Ubicacion`, en PHP simple y comentado, sin librer�
 
 ## Seeders
 
+> **ACTUALIZACIÓN:** el Bloque 18 fue eliminado por completo del
+> proyecto (ver `docs/datos-reales/OBSOLETO_bloque_18_lado_norte.md`).
+> Los bloques activos actualmente son **A1 y A2**, con sus datos reales
+> en `docs/datos-reales/bloques_a1_a2.md`.
+
 | Orden | Seeder | Contenido |
 |---|---|---|
 | 1 | `UserSeeder` | Un usuario Administrador inicial (email y password de desarrollo, documentado en el propio seeder con un comentario) |
-| 2 | `BloqueSeeder` | Carga el Bloque 18 con datos reales (ver `datos-reales/bloque_18_lado_norte.md`). NO inventar bloques adicionales. |
-| 3 | `UbicacionSeeder` | Carga las 130 ubicaciones reales del Bloque 18 / Lado Norte (todas tipo Nicho, capacidad 1). Debe generarse mediante un bucle simple (columna 1-26, fila 1-5) aplicando la fórmula de numeración de abajo, NO copiando 130 líneas repetitivas a mano — pero el resultado final debe coincidir exactamente con los datos reales verificados. Dejar el seeder estructurado y comentado para que se puedan agregar otros bloques/lados después, sin inventar ninguno nuevo. |
+| 2 | `BloqueSeeder` | Carga los bloques A1 y A2 con datos reales (ver `datos-reales/bloques_a1_a2.md`). NO inventar bloques adicionales. |
+| 3 | `UbicacionSeeder` | Carga las ubicaciones reales de A1 (160) y A2 (232), aplicando la fórmula de numeración ya verificada, con numeración independiente por lado. Debe generarse mediante un bucle simple, NO copiando líneas repetitivas a mano — pero el resultado final debe coincidir exactamente con los datos reales verificados en `datos-reales/bloques_a1_a2.md`. |
 
 ### Fórmula de numeración verificada (Bloque 18, Lado Norte)
 

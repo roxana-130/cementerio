@@ -10,34 +10,54 @@ class UbicacionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * 
-     * Carga las 130 ubicaciones reales del Bloque 18 / Lado Norte.
-     * Se genera mediante un bucle aplicando la regla de numeración verificada.
+     *
+     * Carga las ubicaciones reales de los Bloques A1 (160 ubicaciones) y A2
+     * (232 ubicaciones), verificadas en docs/datos reales/bloques_a1_a2.md.
+     * El Bloque 18 fue descartado y ya no se siembra.
+     *
+     * La numeración es INDEPENDIENTE por lado: cada lado empieza su propia
+     * numeración en 1 (ej. A1-Sur y A1-Norte ambos tienen números 1 a 76).
+     * La combinación Bloque+Lado+Columna+Fila+Tipo+Numero sigue siendo única
+     * porque el Lado es distinto.
      */
     public function run(): void
     {
-        $bloque18 = Bloque::where('codigo', '18')->firstOrFail();
+        $a1 = Bloque::where('codigo', 'A1')->firstOrFail();
+        $a2 = Bloque::where('codigo', 'A2')->firstOrFail();
 
-        // Parámetros verificados para Bloque 18, Lado Norte
-        $totalFilas = 5;
-        $columnasPorFila = 26;
-        $lado = 'Norte';
-        $tipo = 'Nicho';
+        // ---- Bloque A1 ----
+        $this->sembrarLado($a1, 'Sur', columnas: 19, filas: 4, tipo: 'Nicho');
+        $this->sembrarLado($a1, 'Norte', columnas: 19, filas: 4, tipo: 'Nicho');
+        $this->sembrarLado($a1, 'Este', columnas: 4, filas: 2, tipo: 'Mausoleo');
+        // A1-Oeste: sin datos reales todavia, no se siembra (ver bloques_a1_a2.md).
 
-        // Recorrer filas (1 a 5) y columnas (1 a 26)
-        for ($fila = 1; $fila <= $totalFilas; $fila++) {
-            for ($columna = 1; $columna <= $columnasPorFila; $columna++) {
-                
-                /*
-                 * Fórmula de numeración oficial del Bloque 18 (Lado Norte):
-                 * La numeración comienza en la fila 5 (nichos 1 a 26) y sube hacia la fila 1 (nichos 105 a 130).
-                 * numero = (total_filas - fila) * columnas_por_fila + columna
-                 */
-                $numero = ($totalFilas - $fila) * $columnasPorFila + $columna;
+        // ---- Bloque A2 ----
+        $this->sembrarLado($a2, 'Sur', columnas: 22, filas: 5, tipo: 'Nicho');
+        $this->sembrarLado($a2, 'Norte', columnas: 22, filas: 5, tipo: 'Nicho');
+        $this->sembrarLado($a2, 'Este', columnas: 4, filas: 2, tipo: 'Mausoleo');
+        $this->sembrarLado($a2, 'Oeste', columnas: 2, filas: 2, tipo: 'Mausoleo');
+    }
+
+    /**
+     * Siembra todas las ubicaciones de un lado de un bloque, aplicando la
+     * formula de numeracion verificada (igual que en el Bloque 18):
+     *
+     *   numero = (total_filas - fila) * columnas + columna
+     *
+     * La numeracion comienza en la ultima fila (numeros mas bajos) y sube
+     * hacia la fila 1.
+     */
+    private function sembrarLado(Bloque $bloque, string $lado, int $columnas, int $filas, string $tipo): void
+    {
+        $capacidad = $tipo === 'Mausoleo' ? 5 : 1;
+
+        for ($fila = 1; $fila <= $filas; $fila++) {
+            for ($columna = 1; $columna <= $columnas; $columna++) {
+                $numero = ($filas - $fila) * $columnas + $columna;
 
                 Ubicacion::updateOrCreate(
                     [
-                        'bloque_id' => $bloque18->id,
+                        'bloque_id' => $bloque->id,
                         'lado' => $lado,
                         'columna' => $columna,
                         'fila' => $fila,
@@ -45,7 +65,7 @@ class UbicacionSeeder extends Seeder
                         'numero' => $numero,
                     ],
                     [
-                        'capacidad' => 1, // Nicho = 1 (se autogenera también en el modelo)
+                        'capacidad' => $capacidad,
                         'activo' => true,
                     ]
                 );

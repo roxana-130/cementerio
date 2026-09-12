@@ -1,3 +1,62 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+ * Hoja de estilos del panel administrativo.
+ * Bootstrap 5 + AdminLTE 4 (npm, compilados por Vite) + paleta institucional
+ * del Cementerio General de Sacaba, aplicada sobre las variables CSS que
+ * AdminLTE expone para el sidebar y el header.
+ */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'admin-lte/dist/css/adminlte.css';
+
+:root {
+    --bg-sacaba: #113615;
+    --bg-sacaba-dark: #0a240d;
+    --bg-sacaba-hover: #18481d;
+    --bg-sacaba-active: #1e5924;
+    --text-success-light: #a3e635;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Header fijo arriba mientras el contenido hace scroll (igual que antes). */
+.app-header {
+    position: sticky;
+    top: 0;
+}
+
+/* Sidebar con la paleta institucional verde, usando las variables propias
+   que AdminLTE 4 expone para theming (--lte-sidebar-*). */
+.app-sidebar {
+    --lte-sidebar-color: rgba(255, 255, 255, 0.85);
+    --lte-sidebar-hover-color: #ffffff;
+    --lte-sidebar-hover-bg: var(--bg-sacaba-hover);
+    --lte-sidebar-active-color: #ffffff;
+    --lte-sidebar-menu-active-bg: var(--bg-sacaba-active);
+    --lte-sidebar-menu-active-color: #ffffff;
+    --lte-sidebar-header-color: var(--text-success-light);
+    background-color: var(--bg-sacaba);
+}
+
+.app-sidebar .sidebar-brand {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.app-sidebar .nav-link.active {
+    border-left: 4px solid var(--text-success-light);
+}
+
+.app-sidebar .nav-header {
+    color: var(--text-success-light);
+    opacity: 0.75;
+}
+
+.bg-emerald-badge {
+    background-color: rgba(163, 230, 53, 0.2);
+    color: var(--text-success-light);
+    border: 1px solid rgba(163, 230, 53, 0.4);
+}
+
+.border-white-10 {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}

@@ -42,4 +42,27 @@ class Historial extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * Registra de forma sencilla una acción en el historial de auditoría.
+     */
+    public static function registrar(
+        string $tabla,
+        int $registroId,
+        string $accion,
+        string $descripcion,
+        ?array $datosAnteriores = null,
+        ?array $datosNuevos = null
+    ): self {
+        return self::create([
+            'user_id'          => auth()->id(),
+            'tabla'            => $tabla,
+            'registro_id'      => $registroId,
+            'accion'           => $accion,
+            'descripcion'      => $descripcion,
+            'datos_anteriores' => $datosAnteriores,
+            'datos_nuevos'     => $datosNuevos,
+            'created_at'       => now(),
+        ]);
+    }
 }

@@ -54,7 +54,7 @@
         }
 
         .hero-publico {
-            background: linear-gradient(135deg, #0a240d 0%, #113615 60%, #1e5924 100%);
+            background: url('/images/cementerio.jpeg');
             color: #ffffff;
             padding: 3.5rem 1rem;
             text-align: center;
